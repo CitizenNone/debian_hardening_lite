@@ -6,26 +6,24 @@
 {% endfor %}
 {% endif %}
 {
-  {% if logrotate_nginx.frequency is defined %}
+{% if logrotate_nginx.frequency is defined %}
     {{ logrotate_nginx.frequency }}
-  {% endif %}
-  {% if logrotate_nginx.rotate is defined %}
+{% endif %}
+{% if logrotate_nginx.rotate is defined %}
     rotate {{ logrotate_nginx.rotate }}
-  {% endif %}
-  {% if logrotate_nginx.options is defined %}
-    {% for option in logrotate_nginx.options %}
-      {{ option }}
-    {% endfor %}
-  {% endif %}
-  create {{ logrotate_nginx.create }}
-  {% if logrotate_nginx.compress %}
+{% endif %}
+{% if logrotate_nginx.options is defined %}
+{% for option in logrotate_nginx.options %}
+    {{ option }}
+{% endfor %}
+{% endif %}
+    create {{ logrotate_nginx.create }}
+{% if logrotate_nginx.compress %}
     compress
-  {% endif %}
-  {% if logrotate_nginx.postrotate is defined %}
+{% endif %}
+{% if logrotate_nginx.postrotate is defined %}
     postrotate
-  {{ logrotate_nginx.postrotate | indent(4, true) }}
+{{ logrotate_nginx.postrotate | indent(8, true) }}
     endscript
-  {% endif %}
+{% endif %}
 }
-
-

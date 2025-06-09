@@ -6,26 +6,24 @@
 {% endfor %}
 {% endif %}
 {
-  {% if logrotate_auth.frequency is defined %}
+{% if logrotate_auth.frequency is defined %}
     {{ logrotate_auth.frequency }}
-  {% endif %}
-  {% if logrotate_auth.rotate is defined %}
+{% endif %}
+{% if logrotate_auth.rotate is defined %}
     rotate {{ logrotate_auth.rotate }}
-  {% endif %}
-  {% if logrotate_auth.options is defined %}
-    {% for option in logrotate_auth.options %}
-      {{ option }}
-    {% endfor %}
-  {% endif %}
-  create {{ logrotate_auth.create }}
-  {% if logrotate_auth.compress %}
+{% endif %}
+{% if logrotate_auth.options is defined %}
+{% for option in logrotate_auth.options %}
+    {{ option }}
+{% endfor %}
+{% endif %}
+    create {{ logrotate_auth.create }}
+{% if logrotate_auth.compress %}
     compress
-  {% endif %}
-  {% if logrotate_auth.postrotate is defined %}
+{% endif %}
+{% if logrotate_auth.postrotate is defined %}
     postrotate
-  {{ logrotate_auth.postrotate | indent(4, true) }}
+{{ logrotate_auth.postrotate | indent(8, true) }}
     endscript
-  {% endif %}
+{% endif %}
 }
-
-

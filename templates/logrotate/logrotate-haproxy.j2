@@ -6,24 +6,24 @@
 {% endfor %}
 {% endif %}
 {
-  {% if logrotate_haproxy.frequency is defined %}
+{% if logrotate_haproxy.frequency is defined %}
     {{ logrotate_haproxy.frequency }}
-  {% endif %}
-  {% if logrotate_haproxy.rotate is defined %}
+{% endif %}
+{% if logrotate_haproxy.rotate is defined %}
     rotate {{ logrotate_haproxy.rotate }}
-  {% endif %}
-  {% if logrotate_haproxy.options is defined %}
-    {% for option in logrotate_haproxy.options %}
-      {{ option }}
-    {% endfor %}
-  {% endif %}
-  create {{ logrotate_haproxy.create }}
-  {% if logrotate_haproxy.compress %}
+{% endif %}
+{% if logrotate_haproxy.options is defined %}
+{% for option in logrotate_haproxy.options %}
+    {{ option }}
+{% endfor %}
+{% endif %}
+    create {{ logrotate_haproxy.create }}
+{% if logrotate_haproxy.compress %}
     compress
-  {% endif %}
-  {% if logrotate_haproxy.postrotate is defined %}
+{% endif %}
+{% if logrotate_haproxy.postrotate is defined %}
     postrotate
-  {{ logrotate_haproxy.postrotate | indent(4, true) }}
+{{ logrotate_haproxy.postrotate | indent(8, true) }}
     endscript
-  {% endif %}
+{% endif %}
 }

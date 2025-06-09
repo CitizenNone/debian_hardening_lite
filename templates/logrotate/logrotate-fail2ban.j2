@@ -6,26 +6,24 @@
 {% endfor %}
 {% endif %}
 {
-  {% if logrotate_fail2ban.frequency is defined %}
+{% if logrotate_fail2ban.frequency is defined %}
     {{ logrotate_fail2ban.frequency }}
-  {% endif %}
-  {% if logrotate_fail2ban.rotate is defined %}
+{% endif %}
+{% if logrotate_fail2ban.rotate is defined %}
     rotate {{ logrotate_fail2ban.rotate }}
-  {% endif %}
-  {% if logrotate_fail2ban.options is defined %}
-    {% for option in logrotate_fail2ban.options %}
-      {{ option }}
-    {% endfor %}
-  {% endif %}
-  create {{ logrotate_fail2ban.create }}
-  {% if logrotate_fail2ban.compress %}
+{% endif %}
+{% if logrotate_fail2ban.options is defined %}
+{% for option in logrotate_fail2ban.options %}
+    {{ option }}
+{% endfor %}
+{% endif %}
+    create {{ logrotate_fail2ban.create }}
+{% if logrotate_fail2ban.compress %}
     compress
-  {% endif %}
-  {% if logrotate_fail2ban.postrotate is defined %}
+{% endif %}
+{% if logrotate_fail2ban.postrotate is defined %}
     postrotate
-  {{ logrotate_fail2ban.postrotate | indent(4, true) }}
+{{ logrotate_fail2ban.postrotate | indent(8, true) }}
     endscript
-  {% endif %}
+{% endif %}
 }
-
-

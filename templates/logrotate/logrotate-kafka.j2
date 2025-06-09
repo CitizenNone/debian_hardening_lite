@@ -6,26 +6,24 @@
 {% endfor %}
 {% endif %}
 {
-  {% if logrotate_kafka.frequency is defined %}
+{% if logrotate_kafka.frequency is defined %}
     {{ logrotate_kafka.frequency }}
-  {% endif %}
-  {% if logrotate_kafka.rotate is defined %}
+{% endif %}
+{% if logrotate_kafka.rotate is defined %}
     rotate {{ logrotate_kafka.rotate }}
-  {% endif %}
-  {% if logrotate_kafka.options is defined %}
-    {% for option in logrotate_kafka.options %}
-      {{ option }}
-    {% endfor %}
-  {% endif %}
-  create {{ logrotate_kafka.create }}
-  {% if logrotate_kafka.compress %}
+{% endif %}
+{% if logrotate_kafka.options is defined %}
+{% for option in logrotate_kafka.options %}
+    {{ option }}
+{% endfor %}
+{% endif %}
+    create {{ logrotate_kafka.create }}
+{% if logrotate_kafka.compress %}
     compress
-  {% endif %}
-  {% if logrotate_kafka.postrotate is defined %}
+{% endif %}
+{% if logrotate_kafka.postrotate is defined %}
     postrotate
-  {{ logrotate_kafka.postrotate | indent(4, true) }}
+{{ logrotate_kafka.postrotate | indent(8, true) }}
     endscript
-  {% endif %}
+{% endif %}
 }
-
-

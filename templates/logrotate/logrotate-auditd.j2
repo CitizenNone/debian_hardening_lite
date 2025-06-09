@@ -6,26 +6,24 @@
 {% endfor %}
 {% endif %}
 {
-  {% if logrotate_auditd.frequency is defined %}
+{% if logrotate_auditd.frequency is defined %}
     {{ logrotate_auditd.frequency }}
-  {% endif %}
-  {% if logrotate_auditd.rotate is defined %}
+{% endif %}
+{% if logrotate_auditd.rotate is defined %}
     rotate {{ logrotate_auditd.rotate }}
-  {% endif %}
-  {% if logrotate_auditd.options is defined %}
-    {% for option in logrotate_auditd.options %}
-      {{ option }}
-    {% endfor %}
-  {% endif %}
-  create {{ logrotate_auditd.create }}
-  {% if logrotate_auditd.compress %}
+{% endif %}
+{% if logrotate_auditd.options is defined %}
+{% for option in logrotate_auditd.options %}
+    {{ option }}
+{% endfor %}
+{% endif %}
+    create {{ logrotate_auditd.create }}
+{% if logrotate_auditd.compress %}
     compress
-  {% endif %}
-  {% if logrotate_auditd.postrotate is defined %}
+{% endif %}
+{% if logrotate_auditd.postrotate is defined %}
     postrotate
-  {{ logrotate_auditd.postrotate | indent(4, true) }}
+{{ logrotate_auditd.postrotate | indent(8, true) }}
     endscript
-  {% endif %}
+{% endif %}
 }
-
-

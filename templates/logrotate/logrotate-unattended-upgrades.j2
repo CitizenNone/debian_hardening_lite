@@ -6,26 +6,24 @@
 {% endfor %}
 {% endif %}
 {
-  {% if logrotate_unattended_upgrades.frequency is defined %}
+{% if logrotate_unattended_upgrades.frequency is defined %}
     {{ logrotate_unattended_upgrades.frequency }}
-  {% endif %}
-  {% if logrotate_unattended_upgrades.rotate is defined %}
+{% endif %}
+{% if logrotate_unattended_upgrades.rotate is defined %}
     rotate {{ logrotate_unattended_upgrades.rotate }}
-  {% endif %}
-  {% if logrotate_unattended_upgrades.options is defined %}
-    {% for option in logrotate_unattended_upgrades.options %}
-      {{ option }}
-    {% endfor %}
-  {% endif %}
-  create {{ logrotate_unattended_upgrades.create }}
-  {% if logrotate_unattended_upgrades.compress %}
+{% endif %}
+{% if logrotate_unattended_upgrades.options is defined %}
+{% for option in logrotate_unattended_upgrades.options %}
+    {{ option }}
+{% endfor %}
+{% endif %}
+    create {{ logrotate_unattended_upgrades.create }}
+{% if logrotate_unattended_upgrades.compress %}
     compress
-  {% endif %}
-  {% if logrotate_unattended_upgrades.postrotate is defined %}
+{% endif %}
+{% if logrotate_unattended_upgrades.postrotate is defined %}
     postrotate
-  {{ logrotate_unattended_upgrades.postrotate | indent(4, true) }}
+{{ logrotate_unattended_upgrades.postrotate | indent(8, true) }}
     endscript
-  {% endif %}
+{% endif %}
 }
-
-

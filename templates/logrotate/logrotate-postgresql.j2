@@ -6,26 +6,24 @@
 {% endfor %}
 {% endif %}
 {
-  {% if logrotate_postgresql.frequency is defined %}
+{% if logrotate_postgresql.frequency is defined %}
     {{ logrotate_postgresql.frequency }}
-  {% endif %}
-  {% if logrotate_postgresql.rotate is defined %}
+{% endif %}
+{% if logrotate_postgresql.rotate is defined %}
     rotate {{ logrotate_postgresql.rotate }}
-  {% endif %}
-  {% if logrotate_postgresql.options is defined %}
-    {% for option in logrotate_postgresql.options %}
-      {{ option }}
-    {% endfor %}
-  {% endif %}
-  create {{ logrotate_postgresql.create }}
-  {% if logrotate_postgresql.compress %}
+{% endif %}
+{% if logrotate_postgresql.options is defined %}
+{% for option in logrotate_postgresql.options %}
+    {{ option }}
+{% endfor %}
+{% endif %}
+    create {{ logrotate_postgresql.create }}
+{% if logrotate_postgresql.compress %}
     compress
-  {% endif %}
-  {% if logrotate_postgresql.postrotate is defined %}
+{% endif %}
+{% if logrotate_postgresql.postrotate is defined %}
     postrotate
-  {{ logrotate_postgresql.postrotate | indent(4, true) }}
+{{ logrotate_postgresql.postrotate | indent(8, true) }}
     endscript
-  {% endif %}
+{% endif %}
 }
-
-
